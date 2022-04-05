@@ -1,0 +1,8 @@
+auth-api/node_modules
+auth-api/dist
+sales-api/node_modules
+sales-api/dist
+product-api/target/
+product-api/!.mvn/wrapper/maven-wrapper.jar
+product-api/!**/src/main/**/target/
+product-api/!**/src/test/**/target/

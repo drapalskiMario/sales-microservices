@@ -1,0 +1,8 @@
+
+export const {
+  AUTH_PORT,
+  JWT_SECRET,
+  AUTH_POSTGRES_DB,
+  POSTGRES_USER,
+  POSTGRES_PASSWORD
+ } = process.env
