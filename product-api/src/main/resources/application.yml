@@ -11,7 +11,7 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5433/product-db
+    url: jdbc:postgresql://${POSTGRESHOST}:5432/product-db
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
     initialization-mode: always
@@ -22,6 +22,7 @@ spring:
   jpa:
     hibernate:
       format_sql: true
+      ddl-auto: create
     show_sql: true
     properties:
       hibernate:

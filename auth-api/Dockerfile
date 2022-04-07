@@ -1,7 +1,13 @@
-FROM node:14
-WORKDIR .
-COPY package.json ./
+FROM node:15
+
+WORKDIR /usr/app
+
+COPY package.json /usr/app
+
 RUN npm i
-COPY . .
+
+COPY . /usr/app
+
 EXPOSE 3000
-CMD ["npm", "start"]
+
+CMD [ "npm", "start" ]

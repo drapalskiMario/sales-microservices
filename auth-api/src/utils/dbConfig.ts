@@ -1,13 +1,13 @@
 import 'dotenv/config'
 import { Sequelize } from 'sequelize'
-import { AUTH_POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER } from './contants'
+import { AUTH_POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER, POSTGRES_HOST } from './contants'
 
 const sequelize = new Sequelize({
   database: AUTH_POSTGRES_DB,
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
   dialect: 'postgres',
-  host: 'localhost',
+  host: POSTGRES_HOST,
   quoteIdentifiers: false,
   define: {
     timestamps: false,

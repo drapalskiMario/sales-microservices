@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc && node dist/main.js",
+    "start": "npx tsc && node dist/main.js",
     "dev": "ts-node-dev --respawn --transpile-only src/ts.js"
   },
   "keywords": [],
