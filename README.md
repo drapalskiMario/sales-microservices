@@ -1,6 +1,4 @@
-Projeto realizado no curso: https://www.udemy.com/course/comunicacao-entre-microsservicos/
-
-# Projeto: Curso Udemy - Comunicação entre Microsserviços
+Projeto realizado para estudos de comunicação entre microsserviços (amqp) através curso: https://www.udemy.com/course/comunicacao-entre-microsservicos/
 
 ## Tecnologias
 
@@ -52,40 +50,6 @@ O fluxo está descrito abaixo:
 * 10 - Caso dê algum problema na atualização, a API de produtos publicará uma mensagem na fila de confirmação de vendas com status REJECTED.
 * 11 - Por fim, a API de pedidos irá receber a mensagem de confirmação e atualizará o pedido com o status retornado na mensagem.
 
-## Logs e Tracing da API
-
-Todos os endpoints necessitam um header chamado **transactionid**, pois representará o ID que irá percorrer toda a requisição no serviço, e, caso essa aplicação chame outros microsserviços, esse **transactionid** será repassado. Todos os endpoints de entrada e saída irão logar os dados de entrada (JSON ou parâmetros) e o **transactionid**. 
-
-A cada requisição pra cada microsserviço, teremos um atributo **serviceid** gerado apenas para os logs desse serviço em si. Teremos então o **transactionid** que irá circular entre todos os microsserviços envolvidos na requisição, e cada microsserviço terá seu próprio **serviceid**.
-
-Fluxo de tracing nas requisições:
-
-**POST** - **/api/order** com **transactionid**: ef8347eb-2207-4610-86c0-657b4e5851a3
-
-```
-service-1:
-transactionid: ef8347eb-2207-4610-86c0-657b4e5851a3
-serviceid    : 6116a0f4-6c9f-491f-b180-ea31bea2d9de
-|
-| HTTP Request
-|----------------> service-2:
-                   transactionid: ef8347eb-2207-4610-86c0-657b4e5851a3
-                   serviceid    : 4e1261c1-9a0c-4a5d-bfc2-49744fd159c6
-                   |
-                   | HTTP Request
-                   |----------------> service-3: /api/check-stock
-                                      transactionid: ef8347eb-2207-4610-86c0-657b4e5851a3
-                                      serviceid    : b4fbc082-a49a-440d-b1d6-2bd0557fd189
-```
-
-Como podemos ver no fluxo acima, o **transactionid** ef8347eb-2207-4610-86c0-657b4e5851a3 manteve-se o mesmo nos 3 serviços, e cada serviço possui
-seu próprio **serviceid**.
-
-Exemplo de um fluxo completo chamando 5 serviços e gerando **transactionid** e **serviceid**:
-
-![Tracing](https://github.com/vhnegrisoli/curso-udemy-comunicacao-microsservicos/blob/master/Conte%C3%BAdos/Tracing.png)
-
-Exemplo de logs nas APIs desenvolvidas:
 
 Auth-API:
 
@@ -122,30 +86,4 @@ Sending message: {"salesId":"6165b92addaf7fc9dd85dad0","status":"APPROVED","tran
 
 Recieving message from queue: {"salesId":"6165b92addaf7fc9dd85dad0","status":"APPROVED","transactionid":"8817508e-805c-48fb-9cb4-6a1e5a6e71e9"}
 ```
-
-
-## Comandos Docker
-
-Abaixo serão listados alguns dos comandos executados durante o curso para criação dos containers 
-dos bancos de dados PostgreSQL, MongoDB e do message broker RabbitMQ:
-
-#### Container Auth-DB
-
-`docker run --name auth-db -p 5432:5432 -e POSTGRES_DB=auth-db -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=1234 postgres:11`
-
-#### Container Product-DB
-
-`docker run --name product-db -p 5433:5432 -e POSTGRES_DB=product-db -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=1234 postgres:11`
-
-#### Container Sales-DB
-
-`docker run --name sales-db -p 27017:27017 -p 28017:28017 -e MONGODB_USER="admin" -e MONGODB_DATABASE="sales" -e MONGODB_PASS="1234" mongo`
-
-#### Conexão no Mongoshell
-
-`mongodb://admin:1234@localhost:27017/sales-db?authSource=admin`
-
-#### Container RabbitMQ
-
-`docker run --name sales_rabbit -p 5672:5672 -p 25676:25676 -p 15672:15672 rabbitmq:3-management`
 
