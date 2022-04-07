@@ -1,4 +1,4 @@
-Projeto realizado para estudos de comunicação entre microsserviços (amqp) através curso: https://www.udemy.com/course/comunicacao-entre-microsservicos/
+Projeto realizado para estudos de comunicação entre microsserviços (amqp) através do curso: https://www.udemy.com/course/comunicacao-entre-microsservicos/
 
 ## Tecnologias
 
