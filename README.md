@@ -8,10 +8,10 @@ Projeto realizado para estudos de comunicação entre microsserviços (amqp) atr
 * **Node.js 14**
 * **ES6 Modules**
 * **Express.js**
-* **MongoDB (Container e Cloud MongoDB)**
+* **MongoDB**
 * **API REST**
-* **PostgreSQL (Container e Heroku Postgres)**
-* **RabbitMQ (Container e CloudAMQP)**
+* **PostgreSQL**
+* **RabbitMQ**
 * **Docker**
 * **docker-compose**
 * **JWT**
